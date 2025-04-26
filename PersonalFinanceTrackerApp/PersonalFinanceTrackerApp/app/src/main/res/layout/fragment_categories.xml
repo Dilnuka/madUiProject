@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Expense Categories"
-                android:textColor="@color/white"/>
+                android:textColor="@color/black"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/incomeButton"
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Income Categories"
-                android:textColor="@color/white"/>
+                android:textColor="@color/black"/>
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
         <androidx.recyclerview.widget.RecyclerView

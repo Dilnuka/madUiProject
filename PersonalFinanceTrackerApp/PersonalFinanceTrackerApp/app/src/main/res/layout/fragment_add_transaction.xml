@@ -63,7 +63,8 @@
             android:id="@+id/amountInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -80,7 +81,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/descriptionInput"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -92,13 +94,15 @@
         app:boxStrokeColor="@color/primary"
         app:hintTextColor="@color/primary"
         app:startIconDrawable="@drawable/ic_category"
-        app:startIconTint="@color/primary">
+        app:startIconTint="@color/primary"
+        android:textColorHint="@color/black">
 
         <AutoCompleteTextView
             android:id="@+id/categoryInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none" />
+            android:inputType="none"
+            android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout

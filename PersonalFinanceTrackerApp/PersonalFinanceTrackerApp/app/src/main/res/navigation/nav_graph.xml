@@ -94,4 +94,16 @@
         android:name="com.example.personalfinancetracker.ui.settings.CategoriesFragment"
         android:label="@string/categories" />
 
+    <fragment
+        android:id="@+id/myProfile"
+        android:name="com.example.personalfinancetracker.ui.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_myProfile_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
 </navigation> 

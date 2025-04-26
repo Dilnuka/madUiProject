@@ -60,7 +60,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/monthly_budget"
                                 android:textSize="20sp"
-                                android:textColor="@color/white" />
+                                android:textColor="@color/black" />
 
                             <TextView
                                 android:id="@+id/monthlyBudgetText"
@@ -114,7 +114,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/currency"
                                 android:textSize="20sp"
-                                android:textColor="@color/white" />
+                                android:textColor="@color/black" />
 
                             <TextView
                                 android:id="@+id/currencyText"
@@ -189,7 +189,7 @@
                         android:layout_height="wrap_content"
                         android:text="Data Management"
                         android:textSize="18sp"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:layout_marginBottom="16dp" />
 
                     <!-- Export Data -->
@@ -220,7 +220,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:text="@string/export_data"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         style="@style/Widget.App.Button.OutlinedButton"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="16dp"
@@ -254,7 +254,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:text="@string/import_data"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         style="@style/Widget.App.Button.OutlinedButton"
                         android:layout_marginTop="8dp"
                         app:cornerRadius="25dp"/>

@@ -16,9 +16,9 @@
     <color name="secondary_variant">#018786</color>
 
     <!-- Text colors -->
-    <color name="text_primary">#FFFFFF</color>
-    <color name="text_secondary">#B3FFFFFF</color>
-    <color name="text_tertiary">#80FFFFFF</color>
+    <color name="text_primary">#000000</color>
+    <color name="text_secondary">#757575</color>
+    <color name="text_tertiary">#9E9E9E</color>
 
     <!-- Status indicators -->
     <color name="income_color">#4CAF50</color>
@@ -26,13 +26,13 @@
     <color name="warning">#FFA000</color>
 
     <!-- Background colors -->
-    <color name="background">#121212</color>
-    <color name="surface">#1E1E1E</color>
-    <color name="surface_variant">#2D2D2D</color>
-    <color name="card_background">#212121</color>
+    <color name="background">#FFFFFF</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_variant">#FFFFFF</color>
+    <color name="card_background">#FFFFFF</color>
 
     <!-- Other UI elements -->
-    <color name="divider">#333333</color>
+    <color name="divider">#E0E0E0</color>
 
     <!-- New colors for charts -->
     <color name="error">#B00020</color>

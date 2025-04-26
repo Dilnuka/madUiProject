@@ -60,6 +60,17 @@ class AuthRepository(private val context: Context) {
         setCurrentUser(null)
     }
 
+    fun updateUser(updatedUser: User) {
+        val users = getAllUsers()
+        val index = users.indexOfFirst { it.id == updatedUser.id }
+        if (index != -1) {
+            val updatedUsers = users.toMutableList()
+            updatedUsers[index] = updatedUser
+            saveUsers(updatedUsers)
+            setCurrentUser(updatedUser)
+        }
+    }
+
     private fun getAllUsers(): List<User> {
         val json = sharedPreferences.getString(KEY_USERS, "[]")
         val type = object : TypeToken<List<User>>() {}.type

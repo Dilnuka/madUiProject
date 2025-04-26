@@ -43,7 +43,7 @@
             app:icon="@android:drawable/ic_menu_edit"
             app:iconGravity="textStart"
             app:iconPadding="0dp"
-            app:iconTint="@color/white"
+            app:iconTint="@color/black"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:contentDescription="Edit"
              />

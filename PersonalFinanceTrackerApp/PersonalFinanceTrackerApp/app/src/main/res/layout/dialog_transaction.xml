@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="@color/white"
     android:padding="16dp">
 
     <!-- Transaction Type Selection -->
@@ -19,15 +20,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/income"
-            android:checked="true" />
+            android:text="@string/income" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/expenseRadio"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/expense" />
+            android:text="@string/expense"
+            android:checked="true" />
     </RadioGroup>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -46,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
-            android:textColor="@color/background"/>
+            android:textColor="@color/black"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -66,7 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:textColor="@color/background"/>
+            android:textColor="@color/black"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -79,14 +80,15 @@
         app:boxStrokeColor="@color/primary"
         app:hintTextColor="@color/primary"
         app:startIconDrawable="@drawable/ic_category"
-        app:startIconTint="@color/primary">
+        app:startIconTint="@color/primary"
+        android:textColorHint="@color/black">
 
         <AutoCompleteTextView
             android:id="@+id/categoryInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none"
-            android:textColor="@color/background" />
+            android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -99,14 +101,15 @@
         app:boxStrokeColor="@color/primary"
         app:hintTextColor="@color/primary"
         app:startIconDrawable="@drawable/ic_category"
-        app:startIconTint="@color/primary">
+        app:startIconTint="@color/primary"
+        android:textColorHint="@color/black">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/incomeCategoryInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:textColor="@color/background"/>
+            android:textColor="@color/black"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 

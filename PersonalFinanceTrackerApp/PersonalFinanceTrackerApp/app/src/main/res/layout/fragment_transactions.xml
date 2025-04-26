@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="All"
-                android:textColor="@color/white"/>
+                android:textColor="@color/black"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/incomeButton"
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Income"
-                android:textColor="@color/white"/>
+                android:textColor="@color/black"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/expenseButton"
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Expense"
-                android:textColor="@color/white"/>
+                android:textColor="@color/black"/>
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -97,9 +97,9 @@
         android:layout_margin="16dp"
         android:contentDescription="@string/add_transaction"
         android:text="@string/add_transaction"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         app:backgroundTint="@color/primary"
         app:icon="@drawable/ic_add"
-        app:iconTint="@color/white" />
+        app:iconTint="@color/black" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
