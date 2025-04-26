@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.personalfinancetracker.ui.auth.LoginFragment"
+        android:label="Login">
+        <action
+            android:id="@+id/action_loginFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.personalfinancetracker.ui.auth.RegisterFragment"
+        android:label="Register">
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.example.personalfinancetracker.ui.dashboard.DashboardFragment"
+        android:label="Dashboard">
+        <action
+            android:id="@+id/action_dashboardFragment_to_transactionsFragment"
+            app:destination="@id/transactionsFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/transactionsFragment"
+        android:name="com.example.personalfinancetracker.ui.transactions.TransactionsFragment"
+        android:label="@string/title_transactions">
+        <action
+            android:id="@+id/action_transactionsFragment_to_addTransactionFragment"
+            app:destination="@id/addTransactionFragment" />
+        <action
+            android:id="@+id/action_transactionsFragment_to_editTransactionFragment"
+            app:destination="@id/editTransactionFragment">
+            <argument
+                android:name="transactionId"
+                app:argType="string" />
+        </action>
+        <action
+            android:id="@+id/action_transactionsFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+        <action
+            android:id="@+id/action_transactionsFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.personalfinancetracker.ui.settings.SettingsFragment"
+        android:label="@string/title_settings">
+        <action
+            android:id="@+id/action_settingsFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_transactionsFragment"
+            app:destination="@id/transactionsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addTransactionFragment"
+        android:name="com.example.personalfinancetracker.ui.transactions.AddTransactionFragment"
+        android:label="@string/add_transaction" />
+
+    <fragment
+        android:id="@+id/editTransactionFragment"
+        android:name="com.example.personalfinancetracker.ui.transactions.EditTransactionFragment"
+        android:label="@string/edit_transaction">
+        <argument
+            android:name="transactionId"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/categoriesFragment"
+        android:name="com.example.personalfinancetracker.ui.settings.CategoriesFragment"
+        android:label="@string/categories" />
+
+</navigation> 

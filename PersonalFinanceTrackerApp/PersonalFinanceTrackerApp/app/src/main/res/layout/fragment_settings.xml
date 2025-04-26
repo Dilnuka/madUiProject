@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/background"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <!-- Budget Section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="24dp"
+                    app:cardBackgroundColor="@color/card_background"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        >
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_money"
+                            android:layout_marginEnd="16dp"
+                            app:tint="@color/primary" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/monthly_budget"
+                                android:textSize="20sp"
+                                android:textColor="@color/white" />
+
+                            <TextView
+                                android:id="@+id/monthlyBudgetText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="$0.00"
+                                android:textSize="16sp"
+                                android:textColor="@color/text_secondary"
+                                android:layout_marginTop="4dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/editBudgetButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="@string/edit_budget"
+                        style="@style/Widget.App.Button"
+                        android:layout_marginTop="8dp"
+                        app:cornerRadius="25dp"/>
+                </LinearLayout>
+
+                <!-- Currency Section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="24dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="8dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_money"
+                            android:layout_marginEnd="16dp"
+                            app:tint="@color/primary" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/currency"
+                                android:textSize="20sp"
+                                android:textColor="@color/white" />
+
+                            <TextView
+                                android:id="@+id/currencyText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Rs"
+                                android:textSize="16sp"
+                                android:textColor="@color/text_secondary"
+                                android:layout_marginTop="4dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/selectCurrencyButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="@string/select_currency"
+                        style="@style/Widget.App.Button"
+                        android:layout_marginTop="8dp"
+                        app:cornerRadius="25dp"/>
+                </LinearLayout>
+
+                <!-- Categories Section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="24dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="8dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_category"
+                            android:layout_marginEnd="16dp"
+                            app:tint="@color/primary" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/categories"
+                            android:textSize="20sp"
+                            android:textColor="@color/white" />
+
+
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/manageCategoriesButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="@string/manage_categories"
+                        style="@style/Widget.App.Button"
+                        android:layout_marginTop="8dp"
+                        app:cornerRadius="25dp"/>
+                </LinearLayout>
+
+                <!-- Data Management Section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Data Management"
+                        android:textSize="18sp"
+                        android:textColor="@color/white"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Export Data -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="8dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_file_download"
+                            android:layout_marginEnd="16dp"
+                            app:tint="@color/primary" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/export_data"
+                            android:textSize="16sp"
+                            android:textColor="@color/text_secondary" />
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/exportDataButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="@string/export_data"
+                        android:textColor="@color/white"
+                        style="@style/Widget.App.Button.OutlinedButton"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="16dp"
+                        app:cornerRadius="25dp"/>
+
+                    <!-- Import Data -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="8dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_file_upload"
+                            android:layout_marginEnd="16dp"
+                            app:tint="@color/primary" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/import_data"
+                            android:textSize="16sp"
+                            android:textColor="@color/text_secondary" />
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/importDataButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="@string/import_data"
+                        android:textColor="@color/white"
+                        style="@style/Widget.App.Button.OutlinedButton"
+                        android:layout_marginTop="8dp"
+                        app:cornerRadius="25dp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
