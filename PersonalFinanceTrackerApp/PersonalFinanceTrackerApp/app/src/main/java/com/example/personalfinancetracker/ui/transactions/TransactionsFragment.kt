@@ -114,6 +114,10 @@ class TransactionsFragment : Fragment() {
             .setNegativeButton(R.string.cancel, null)
             .create()
 
+        // Set initial visibility for category layouts
+        dialogBinding.categoryLayout.visibility = View.VISIBLE
+        dialogBinding.incomeCategoryLayout.visibility = View.GONE
+
         // Set up type selection
         dialogBinding.typeSelection.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
@@ -130,10 +134,15 @@ class TransactionsFragment : Fragment() {
             }
         }
 
-        // Set up category dropdown
-        val categories = viewModel.getCategories(TransactionType.EXPENSE)
-        val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, categories)
-        dialogBinding.categoryInput.setAdapter(adapter)
+        // Set up expense category dropdown
+        val expenseCategories = viewModel.getCategories(TransactionType.EXPENSE)
+        val expenseAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, expenseCategories)
+        dialogBinding.categoryInput.setAdapter(expenseAdapter)
+
+        // Set up income category dropdown
+        val incomeCategories = viewModel.getCategories(TransactionType.INCOME)
+        val incomeAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, incomeCategories)
+        dialogBinding.incomeCategoryInput.setAdapter(incomeAdapter)
 
         dialog.show()
     }

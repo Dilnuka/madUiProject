@@ -12,26 +12,62 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <!-- Welcome Section -->
         <TextView
             android:id="@+id/greetingText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="24sp"
             android:text="Welcome, [Username]"
-            android:layout_marginBottom="16dp"
-            android:textColor="@color/white"
+            android:layout_marginBottom="24dp"
+            android:textColor="@color/black"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Budget Card -->
+        <!-- Balance Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/primary"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/primary"
             app:cardCornerRadius="15dp"
-            app:cardElevation="4dp"
-            >
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/balance"
+                    android:textAppearance="?attr/textAppearanceSubtitle1"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    tools:text="$150000.00" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Monthly Budget Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/card_background"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -53,7 +89,7 @@
                     android:layout_marginTop="8dp"
                     android:textSize="24sp"
                     android:textStyle="bold"
-                    android:textColor="@color/black"
+                    android:textColor="@color/primary"
                     tools:text="$1,000.00" />
 
                 <LinearLayout
@@ -78,21 +114,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
+                        android:textColor="@color/warning"
                         tools:text="You are approaching your monthly budget limit!" />
 
                 </LinearLayout>
-
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
-
-
 
         <!-- Income and Expense Cards -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="20dp">
 
             <!-- Income Card -->
             <com.google.android.material.card.MaterialCardView
@@ -114,7 +148,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/total_income"
-                        android:textAppearance="?attr/textAppearanceSubtitle1" />
+                        android:textAppearance="?attr/textAppearanceSubtitle1"
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/totalIncome"
@@ -122,6 +157,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:textColor="@color/primary"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
                         android:textAppearance="?attr/textAppearanceHeadline6" />
 
                 </LinearLayout>
@@ -147,7 +184,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/total_expense"
-                        android:textAppearance="?attr/textAppearanceSubtitle1" />
+                        android:textAppearance="?attr/textAppearanceSubtitle1"
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/totalExpense"
@@ -155,99 +193,22 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:textAppearance="?attr/textAppearanceHeadline6"
-                        android:textColor="@color/primary" />
+                        android:textColor="@color/primary"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
-
-        <!-- Balance Card -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="@color/card_background"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="4dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:backgroundTint="@color/card_background"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/balance"
-                    android:textAppearance="?attr/textAppearanceHeadline6" />
-
-                <TextView
-                    android:id="@+id/balance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textAppearance="?attr/textAppearanceHeadline4"
-                    android:textColor="@color/black"/>
-
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
 
         <!-- Income vs Expense Chart -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            app:cardCornerRadius="8dp"
+            app:cardCornerRadius="15dp"
             app:cardElevation="4dp"
-            android:backgroundTint="@color/background">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="24dp"
-                android:background="@color/divider" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="16dp"
-                android:padding="16dp"
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/income_vs_expense"
-                    android:textAppearance="?attr/textAppearanceSubtitle1"
-                    android:textColor="@color/white"/>
-
-                <com.github.mikephil.charting.charts.PieChart
-                    android:id="@+id/incomeExpensePieChart"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="8dp" />
-
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/divider" />
-
-        <!-- Categories Chart -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
-            android:backgroundTint="@color/background">
+            android:backgroundTint="@color/card_background">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -258,14 +219,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/expenses_by_category"
+                    android:text="@string/income_vs_expense"
                     android:textAppearance="?attr/textAppearanceSubtitle1"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/black"/>
 
                 <com.github.mikephil.charting.charts.PieChart
-                    android:id="@+id/categoriesPieChart"
+                    android:id="@+id/incomeExpensePieChart"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="250dp"
                     android:layout_marginTop="8dp" />
 
             </LinearLayout>

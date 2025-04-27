@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Xpensor</string>
+    <string name="app_name">MoneyMate</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_transactions">Transactions</string>
     <string name="title_settings">Settings</string>

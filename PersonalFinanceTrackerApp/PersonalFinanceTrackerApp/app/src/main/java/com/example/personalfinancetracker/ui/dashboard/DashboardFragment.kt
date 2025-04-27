@@ -54,7 +54,6 @@ class DashboardFragment : Fragment() {
 
         setupObservers()
         setupIncomeExpensePieChart()
-        setupCategoriesPieChart()
     }
 
     private fun setupObservers() {
@@ -85,35 +84,16 @@ class DashboardFragment : Fragment() {
                 }
             }
         }
-
-        viewModel.expenseByCategory.observe(viewLifecycleOwner) { expenseMap ->
-            updateCategoriesPieChart(expenseMap)
-        }
     }
 
     private fun setupIncomeExpensePieChart() {
         binding.incomeExpensePieChart.apply {
             description.isEnabled = false
             legend.isEnabled = false
-            setHoleColor(android.R.color.transparent)
-            setTransparentCircleAlpha(0)
-            setEntryLabelColor(ContextCompat.getColor(requireContext(), R.color.white))
+            setDrawHoleEnabled(false)
+            setEntryLabelColor(ContextCompat.getColor(requireContext(), R.color.black))
             setEntryLabelTextSize(12f)
             setDrawEntryLabels(true)
-        }
-    }
-
-    private fun setupCategoriesPieChart() {
-        binding.categoriesPieChart.apply {
-            description.isEnabled = false
-            legend.isEnabled = true
-            legend.textColor = ContextCompat.getColor(requireContext(), R.color.white)
-            legend.textSize = 12f
-            setHoleColor(android.R.color.transparent)
-            setTransparentCircleAlpha(0)
-            setEntryLabelColor(ContextCompat.getColor(requireContext(), R.color.white))
-            setEntryLabelTextSize(12f)
-            setDrawEntryLabels(false)
         }
     }
 
@@ -141,7 +121,7 @@ class DashboardFragment : Fragment() {
                 ContextCompat.getColor(requireContext(), R.color.primary)
             )
             valueTextSize = 12f
-            valueTextColor = ContextCompat.getColor(requireContext(), R.color.white)
+            valueTextColor = ContextCompat.getColor(requireContext(), R.color.black)
             yValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
             valueLinePart1Length = 0.4f
             valueLinePart2Length = 0.4f
@@ -149,34 +129,6 @@ class DashboardFragment : Fragment() {
 
         binding.incomeExpensePieChart.data = PieData(dataSet)
         binding.incomeExpensePieChart.invalidate()
-    }
-
-    private fun updateCategoriesPieChart(expenseMap: Map<String, Double>) {
-        val entries = expenseMap.entries.map { (category, amount) ->
-            PieEntry(amount.toFloat(), category)
-        }
-
-        val colors = listOf(
-            ContextCompat.getColor(requireContext(), R.color.chart_color_1),
-            ContextCompat.getColor(requireContext(), R.color.chart_color_2),
-            ContextCompat.getColor(requireContext(), R.color.chart_color_3),
-            ContextCompat.getColor(requireContext(), R.color.chart_color_4),
-            ContextCompat.getColor(requireContext(), R.color.chart_color_5)
-        ).let { colorList ->
-            List(entries.size) { i -> colorList[i % colorList.size] }
-        }
-
-        val dataSet = PieDataSet(entries, "").apply {
-            this.colors = colors
-            valueTextSize = 12f
-            valueTextColor = ContextCompat.getColor(requireContext(), R.color.white)
-            yValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
-            valueLinePart1Length = 0.4f
-            valueLinePart2Length = 0.4f
-        }
-
-        binding.categoriesPieChart.data = PieData(dataSet)
-        binding.categoriesPieChart.invalidate()
     }
 
     private fun formatCurrency(amount: Double): String {

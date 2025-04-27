@@ -24,6 +24,52 @@ class TransactionRepository(private val context: Context) {
         const val KEY_INCOME_CATEGORIES = "income_categories"
         const val PREFS_NAME = "transactions_prefs"
         const val KEY_TRANSACTIONS = "transactions"
+
+        private val DEFAULT_EXPENSE_CATEGORIES = listOf(
+            "Food & Dining",
+            "Transportation",
+            "Housing",
+            "Insurance",
+            "Health & Medical",
+            "Entertainment",
+            "Shopping",
+            "Education",
+            "Travel",
+            "Debt Payments",
+            "Subscriptions",
+            "Taxes",
+            "Gifts & Donations",
+            "Miscellaneous"
+        )
+
+        private val DEFAULT_INCOME_CATEGORIES = listOf(
+            "Salary",
+            "Business Income",
+            "Investment Income",
+            "Rental Income",
+            "Interest Income",
+            "Cash Gifts",
+            "Refunds/Reimbursements",
+            "Side Hustle",
+            "Royalties",
+            "Other Income"
+        )
+    }
+
+    init {
+        initializeDefaultCategories()
+    }
+
+    private fun initializeDefaultCategories() {
+        // Initialize expense categories if not already set
+        if (getCategories(TransactionType.EXPENSE).isEmpty()) {
+            saveCategories(DEFAULT_EXPENSE_CATEGORIES, TransactionType.EXPENSE)
+        }
+
+        // Initialize income categories if not already set
+        if (getCategories(TransactionType.INCOME).isEmpty()) {
+            saveCategories(DEFAULT_INCOME_CATEGORIES, TransactionType.INCOME)
+        }
     }
 
     fun getAllTransactions(): List<Transaction> {

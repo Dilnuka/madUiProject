@@ -7,17 +7,20 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.personalfinancetracker.data.AuthRepository
 import com.example.personalfinancetracker.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var authRepository: AuthRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         
+        authRepository = AuthRepository(this)
         setSupportActionBar(binding.toolbar)
         setupNavigation()
     }
@@ -31,7 +34,8 @@ class MainActivity : AppCompatActivity() {
             setOf(
                 R.id.dashboardFragment,
                 R.id.transactionsFragment,
-                R.id.settingsFragment
+                R.id.settingsFragment,
+                R.id.myProfile
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -47,6 +51,11 @@ class MainActivity : AppCompatActivity() {
                     binding.bottomNavigation.visibility = View.VISIBLE
                 }
             }
+        }
+
+        // Check if user is logged in and navigate accordingly
+        if (authRepository.getCurrentUser() != null) {
+            navController.navigate(R.id.transactionsFragment)
         }
     }
 

@@ -97,19 +97,19 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:visibility="gone"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         app:boxStrokeColor="@color/primary"
         app:hintTextColor="@color/primary"
         app:startIconDrawable="@drawable/ic_category"
         app:startIconTint="@color/primary"
         android:textColorHint="@color/black">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <AutoCompleteTextView
             android:id="@+id/incomeCategoryInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:textColor="@color/black"/>
+            android:inputType="none"
+            android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
