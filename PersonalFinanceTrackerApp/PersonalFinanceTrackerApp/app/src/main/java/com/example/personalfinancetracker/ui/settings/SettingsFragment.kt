@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +29,10 @@ class SettingsFragment : Fragment() {
     private val viewModel: SettingsViewModel by viewModels()
     private val exportLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument("text/csv")) { uri ->
         uri?.let { exportDataToFile(it) }
+    }
+
+    private val importLauncher = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        uri?.let { importDataFromFile(it) }
     }
 
     override fun onCreateView(
@@ -74,18 +79,7 @@ class SettingsFragment : Fragment() {
         }
 
         binding.importDataButton.setOnClickListener {
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(R.string.import_data)
-                .setMessage(R.string.import_data_confirmation)
-                .setPositiveButton(R.string.import_data) { _, _ ->
-                    if (viewModel.importData()) {
-                        Snackbar.make(binding.root, R.string.data_imported, Snackbar.LENGTH_SHORT).show()
-                    } else {
-                        Snackbar.make(binding.root, R.string.import_failed, Snackbar.LENGTH_SHORT).show()
-                    }
-                }
-                .setNegativeButton(R.string.cancel, null)
-                .show()
+            importLauncher.launch(arrayOf("*/*"))
         }
     }
 
@@ -160,6 +154,45 @@ class SettingsFragment : Fragment() {
             }
         } catch (e: Exception) {
             Toast.makeText(requireContext(), R.string.export_failed, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun importDataFromFile(uri: Uri) {
+        try {
+            requireContext().contentResolver.openInputStream(uri)?.use { inputStream ->
+                val content = inputStream.bufferedReader().use { it.readText() }
+                Log.d("SettingsFragment", "Read content from file: ${content.take(100)}...")
+                
+                val success = if (uri.toString().endsWith(".csv", ignoreCase = true)) {
+                    Log.d("SettingsFragment", "Detected CSV file")
+                    viewModel.importDataFromCsv(content)
+                } else if (uri.toString().endsWith(".json", ignoreCase = true)) {
+                    Log.d("SettingsFragment", "Detected JSON file")
+                    viewModel.importDataFromJson(content)
+                } else {
+                    Log.d("SettingsFragment", "Trying to detect file format")
+                    if (content.trim().startsWith("[")) {
+                        Log.d("SettingsFragment", "Detected JSON format from content")
+                        viewModel.importDataFromJson(content)
+                    } else {
+                        Log.d("SettingsFragment", "Detected CSV format from content")
+                        viewModel.importDataFromCsv(content)
+                    }
+                }
+                
+                if (success) {
+                    Snackbar.make(binding.root, R.string.data_imported, Snackbar.LENGTH_SHORT).show()
+                } else {
+                    val errorMessage = viewModel.importExportStatus.value ?: "Import failed"
+                    Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_LONG).show()
+                }
+            } ?: run {
+                Log.e("SettingsFragment", "Failed to open input stream for URI: $uri")
+                Snackbar.make(binding.root, "Failed to open file", Snackbar.LENGTH_LONG).show()
+            }
+        } catch (e: Exception) {
+            Log.e("SettingsFragment", "Import failed", e)
+            Snackbar.make(binding.root, "Import failed: ${e.message}", Snackbar.LENGTH_LONG).show()
         }
     }
 
