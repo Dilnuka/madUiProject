@@ -50,14 +50,24 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.loginFragment, R.id.registerFragment -> {
+                    // Hide bottom navigation and FAB for auth screens
                     binding.bottomAppBar.visibility = View.GONE
-                    binding.fabAddTransaction.visibility = View.GONE
+                    binding.fabAddTransaction.hide()
                     binding.toolbar.visibility = View.GONE
+                    // Remove bottom margin from fragment container
+                    binding.navHostFragment.layoutParams = (binding.navHostFragment.layoutParams as androidx.coordinatorlayout.widget.CoordinatorLayout.LayoutParams).apply {
+                        bottomMargin = 0
+                    }
                 }
                 else -> {
+                    // Show bottom navigation and FAB for main screens
                     binding.bottomAppBar.visibility = View.VISIBLE
-                    binding.fabAddTransaction.visibility = View.VISIBLE
+                    binding.fabAddTransaction.show()
                     binding.toolbar.visibility = View.VISIBLE
+                    // Restore bottom margin for fragment container
+                    binding.navHostFragment.layoutParams = (binding.navHostFragment.layoutParams as androidx.coordinatorlayout.widget.CoordinatorLayout.LayoutParams).apply {
+                        bottomMargin = resources.getDimensionPixelSize(R.dimen.bottom_nav_margin)
+                    }
                 }
             }
         }
@@ -81,7 +91,9 @@ class MainActivity : AppCompatActivity() {
                     binding.bottomAppBar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_END)
                 }
                 else -> {
-                    binding.fabAddTransaction.show()
+                    if (destination.id != R.id.loginFragment && destination.id != R.id.registerFragment) {
+                        binding.fabAddTransaction.show()
+                    }
                     binding.bottomAppBar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_CENTER)
                 }
             }

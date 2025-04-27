@@ -48,7 +48,7 @@
         app:backgroundTint="@color/white"
         app:fabCradleMargin="10dp"
         app:fabCradleRoundedCornerRadius="20dp"
-        app:fabCradleVerticalOffset="10dp"
+        app:fabCradleVerticalOffset="8dp"
         app:elevation="8dp"
         app:contentInsetStart="0dp"
         app:contentInsetEnd="0dp">
@@ -80,7 +80,7 @@
         app:backgroundTint="#00BFA5"
         app:tint="@android:color/white"
         app:elevation="6dp"
-        app:maxImageSize="24dp"
+        app:maxImageSize="34dp"
         app:fabSize="normal" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
