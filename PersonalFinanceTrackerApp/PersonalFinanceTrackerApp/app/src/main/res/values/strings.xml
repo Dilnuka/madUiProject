@@ -78,7 +78,7 @@
     <string name="email_exists">Email already exists</string>
     <string name="invalid_credentials">Invalid email or password</string>
     <string name="registration_failed">s</string>
-    <string name="name_required">f</string>
+    <string name="name_required">Please enter valid user Name</string>
     <string name="app_logo">gh</string>
     <string name="dont_have_account">Dont have account?</string>
     <string name="already_have_account">Already have account?</string>

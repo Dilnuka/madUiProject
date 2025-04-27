@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_dashboard"
+        android:icon="@drawable/data"
         android:title="@string/title_dashboard" />
     <item
         android:id="@+id/navigation_transactions"
-        android:icon="@drawable/ic_transactions"
+        android:icon="@drawable/list"
         android:title="@string/title_transactions" />
     <item
         android:id="@+id/navigation_profile"
