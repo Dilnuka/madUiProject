@@ -2,6 +2,7 @@
 package com.example.personalfinancetracker.ui.dashboard
 
 import android.app.Application
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -10,6 +11,7 @@ import com.example.personalfinancetracker.data.AuthRepository
 import com.example.personalfinancetracker.data.TransactionRepository
 import com.example.personalfinancetracker.data.model.Transaction
 import com.example.personalfinancetracker.data.model.TransactionType
+import com.example.personalfinancetracker.receivers.BudgetBroadcastReceiver
 import java.util.Calendar
 
 class DashboardViewModel(application: Application) : AndroidViewModel(application) {
@@ -67,10 +69,21 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
         val totalExpenses = _transactions.value?.filter { it.type == TransactionType.EXPENSE }?.sumOf { it.amount } ?: 0.0
         
         _budgetWarning.value = when {
-            totalExpenses >= budget -> BudgetWarningState.EXCEEDED
+            totalExpenses >= budget -> {
+                sendBudgetExceededBroadcast(totalExpenses, budget)
+                BudgetWarningState.EXCEEDED
+            }
             totalExpenses >= budget * 0.8 -> BudgetWarningState.APPROACHING
             else -> BudgetWarningState.NORMAL
         }
+    }
+
+    private fun sendBudgetExceededBroadcast(totalExpenses: Double, budget: Double) {
+        val intent = Intent(getApplication(), BudgetBroadcastReceiver::class.java).apply {
+            putExtra("total_expenses", totalExpenses)
+            putExtra("monthly_budget", budget)
+        }
+        getApplication<Application>().sendBroadcast(intent)
     }
 
     private fun loadTransactions() {

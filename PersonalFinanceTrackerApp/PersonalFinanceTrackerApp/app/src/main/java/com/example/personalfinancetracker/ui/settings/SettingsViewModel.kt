@@ -3,11 +3,15 @@ package com.example.personalfinancetracker.ui.settings
 
 import android.app.Application
 import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.personalfinancetracker.data.TransactionRepository
 import com.example.personalfinancetracker.data.model.Transaction
+import com.example.personalfinancetracker.data.model.TransactionType
+import com.example.personalfinancetracker.receivers.BudgetBroadcastReceiver
+import com.example.personalfinancetracker.utils.StorageManager
 import com.google.gson.Gson
 import java.io.File
 import java.io.FileOutputStream
@@ -18,6 +22,7 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     private val repository = TransactionRepository(application)
     private val gson = Gson()
     private val sharedPreferences = repository.getSharedPreferences()
+    private val storageManager = StorageManager(application)
 
     private val _monthlyBudget = MutableLiveData<Double>()
     val monthlyBudget: LiveData<Double> = _monthlyBudget
@@ -48,6 +53,23 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     fun setMonthlyBudget(budget: Double) {
         repository.setMonthlyBudget(budget)
         _monthlyBudget.value = budget
+        checkBudgetWarning(budget)
+    }
+
+    private fun checkBudgetWarning(newBudget: Double) {
+        val totalExpenses = _transactions.value?.filter { it.type == TransactionType.EXPENSE }?.sumOf { it.amount } ?: 0.0
+        
+        if (totalExpenses > newBudget) {
+            sendBudgetExceededBroadcast(totalExpenses, newBudget)
+        }
+    }
+
+    private fun sendBudgetExceededBroadcast(totalExpenses: Double, budget: Double) {
+        val intent = Intent(getApplication(), BudgetBroadcastReceiver::class.java).apply {
+            putExtra("total_expenses", totalExpenses)
+            putExtra("monthly_budget", budget)
+        }
+        getApplication<Application>().sendBroadcast(intent)
     }
 
     fun setCurrency(currency: String) {
@@ -59,36 +81,62 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
         return repository.getCurrency()
     }
 
+    fun hasStoragePermission(): Boolean {
+        return storageManager.hasStoragePermission()
+    }
+
+    fun requestStoragePermission() {
+        storageManager.requestStoragePermission()
+    }
+
     fun exportData(): Boolean {
+        if (!hasStoragePermission()) {
+            return false
+        }
+
         return try {
-            val context = getApplication<Application>().applicationContext
             val transactions = repository.getTransactions()
             val json = gson.toJson(transactions)
             
-            val file = File(context.getExternalFilesDir(null), "transactions_backup.json")
-            FileOutputStream(file).use { output ->
-                output.write(json.toByteArray())
+            if (storageManager.writeToFile("transactions_backup.json", json)) {
+                true
+            } else {
+                false
             }
-            true
         } catch (e: Exception) {
             false
         }
     }
 
     fun importData(): Boolean {
+        if (!hasStoragePermission()) {
+            return false
+        }
+
         return try {
-            val context = getApplication<Application>().applicationContext
-            val file = File(context.getExternalFilesDir(null), "transactions_backup.json")
-            
-            if (!file.exists()) {
+            if (!storageManager.fileExists("transactions_backup.json")) {
                 return false
             }
 
-            val json = FileReader(file).use { reader ->
-                reader.readText()
+            if (storageManager.getFileSize("transactions_backup.json") == 0L) {
+                return false
             }
 
-            val transactions = gson.fromJson(json, Array<Transaction>::class.java).toList()
+            val json = storageManager.readFromFile("transactions_backup.json")
+            if (json == null || json.isBlank()) {
+                return false
+            }
+
+            val transactions = try {
+                gson.fromJson(json, Array<Transaction>::class.java).toList()
+            } catch (e: Exception) {
+                return false
+            }
+
+            if (transactions.isEmpty()) {
+                return false
+            }
+
             transactions.forEach { transaction ->
                 repository.addTransaction(transaction)
             }
