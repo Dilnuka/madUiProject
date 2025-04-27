@@ -49,13 +49,17 @@
         app:fabCradleMargin="10dp"
         app:fabCradleRoundedCornerRadius="20dp"
         app:fabCradleVerticalOffset="10dp"
-        app:elevation="8dp">
+        app:elevation="8dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetEnd="0dp">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
             app:itemIconSize="24dp"
             app:itemTextAppearanceActive="@style/BottomNavigationTextAppearance"
             app:itemTextAppearanceInactive="@style/BottomNavigationTextAppearance"
