@@ -5,18 +5,19 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/loginFragment">
 
+    <!-- Auth Flow -->
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.personalfinancetracker.ui.auth.LoginFragment"
         android:label="Login">
         <action
-            android:id="@+id/action_loginFragment_to_dashboardFragment"
-            app:destination="@id/transactionsFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
-        <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_dashboardFragment"
+            app:destination="@id/navigation_dashboard"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -28,59 +29,38 @@
             app:destination="@id/loginFragment" />
     </fragment>
 
+    <!-- Main Flow -->
     <fragment
-        android:id="@+id/dashboardFragment"
+        android:id="@+id/navigation_dashboard"
         android:name="com.example.personalfinancetracker.ui.dashboard.DashboardFragment"
-        android:label="Dashboard">
-        <action
-            android:id="@+id/action_dashboardFragment_to_transactionsFragment"
-            app:destination="@id/transactionsFragment" />
-        <action
-            android:id="@+id/action_dashboardFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-    </fragment>
+        android:label="Dashboard" />
 
     <fragment
-        android:id="@+id/transactionsFragment"
+        android:id="@+id/navigation_transactions"
         android:name="com.example.personalfinancetracker.ui.transactions.TransactionsFragment"
-        android:label="@string/title_transactions">
+        android:label="Transactions" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.personalfinancetracker.ui.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile">
         <action
-            android:id="@+id/action_transactionsFragment_to_addTransactionFragment"
-            app:destination="@id/addTransactionFragment" />
-        <action
-            android:id="@+id/action_transactionsFragment_to_editTransactionFragment"
-            app:destination="@id/editTransactionFragment">
-            <argument
-                android:name="transactionId"
-                app:argType="string" />
-        </action>
-        <action
-            android:id="@+id/action_transactionsFragment_to_dashboardFragment"
-            app:destination="@id/dashboardFragment" />
-        <action
-            android:id="@+id/action_transactionsFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            android:id="@+id/action_myProfile_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
-        android:id="@+id/settingsFragment"
+        android:id="@+id/navigation_settings"
         android:name="com.example.personalfinancetracker.ui.settings.SettingsFragment"
-        android:label="@string/title_settings">
-        <action
-            android:id="@+id/action_settingsFragment_to_categoriesFragment"
-            app:destination="@id/categoriesFragment" />
-        <action
-            android:id="@+id/action_settingsFragment_to_dashboardFragment"
-            app:destination="@id/dashboardFragment" />
-        <action
-            android:id="@+id/action_settingsFragment_to_transactionsFragment"
-            app:destination="@id/transactionsFragment" />
-    </fragment>
+        android:label="Settings" />
 
     <fragment
         android:id="@+id/addTransactionFragment"
         android:name="com.example.personalfinancetracker.ui.transactions.AddTransactionFragment"
-        android:label="@string/add_transaction" />
+        android:label="Add Transaction" />
 
     <fragment
         android:id="@+id/editTransactionFragment"
@@ -95,17 +75,5 @@
         android:id="@+id/categoriesFragment"
         android:name="com.example.personalfinancetracker.ui.settings.CategoriesFragment"
         android:label="@string/categories" />
-
-    <fragment
-        android:id="@+id/myProfile"
-        android:name="com.example.personalfinancetracker.ui.profile.ProfileFragment"
-        android:label="Profile"
-        tools:layout="@layout/fragment_profile">
-        <action
-            android:id="@+id/action_myProfile_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
 
 </navigation> 

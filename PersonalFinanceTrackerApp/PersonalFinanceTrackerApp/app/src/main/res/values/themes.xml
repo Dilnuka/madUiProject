@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Base application theme -->
-    <style name="Theme.PersonalFinanceTrackerApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
+    <style name="Theme.PersonalFinanceTracker" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/primary_dark</item>
         <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
+        <!-- Secondary brand color -->
         <item name="colorSecondary">@color/secondary</item>
         <item name="colorSecondaryVariant">@color/secondary_dark</item>
         <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
+        <!-- Status bar color -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Background colors -->
         <item name="android:windowBackground">@color/background</item>
@@ -20,6 +20,11 @@
         <item name="android:textColorPrimary">@color/black</item>
         <item name="android:textColorSecondary">@color/black</item>
         <item name="android:textColor">@color/black</item>
+        <!-- Material Design theme attributes -->
+        <item name="materialButtonStyle">@style/Widget.App.Button</item>
+        <item name="bottomNavigationStyle">@style/Widget.MaterialComponents.BottomNavigationView</item>
+        <item name="bottomAppBarStyle">@style/Widget.MaterialComponents.BottomAppBar</item>
+        <item name="floatingActionButtonStyle">@style/Widget.MaterialComponents.FloatingActionButton</item>
     </style>
 
     <!-- Shape appearances for rounded corners -->
@@ -40,14 +45,18 @@
 
     <!-- Custom text appearances -->
     <style name="TextAppearance.App.Headline" parent="TextAppearance.MaterialComponents.Headline6">
-        <item name="android:textColor">@color/primary</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/primary</item>
     </style>
 
     <style name="TextAppearance.App.Subtitle" parent="TextAppearance.MaterialComponents.Subtitle1">
-        <item name="fontFamily">sans-serif</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="TextAppearance.App.Body" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_primary</item>
     </style>
 
     <!-- Custom button style -->
@@ -76,5 +85,11 @@
     <style name="ShapeAppearance.App.CornerRadius" parent="">
         <item name="cornerSize">25dp</item>
         <item name="cornerFamily">rounded</item>
+    </style>
+
+    <!-- Bottom Navigation styles -->
+    <style name="BottomNavigationTextAppearance" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/text_secondary</item>
     </style>
 </resources>

@@ -9,6 +9,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.personalfinancetracker.data.AuthRepository
 import com.example.personalfinancetracker.databinding.ActivityMainBinding
+import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,8 +22,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         
-        authRepository = AuthRepository(this)
+        // Set up the toolbar
         setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(true)
+        
+        authRepository = AuthRepository(this)
         setupNavigation()
     }
 
@@ -32,10 +37,10 @@ class MainActivity : AppCompatActivity() {
         
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.dashboardFragment,
-                R.id.transactionsFragment,
-                R.id.settingsFragment,
-                R.id.myProfile
+                R.id.navigation_dashboard,
+                R.id.navigation_transactions,
+                R.id.navigation_profile,
+                R.id.navigation_settings
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -45,17 +50,41 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.loginFragment, R.id.registerFragment -> {
-                    binding.bottomNavigation.visibility = View.GONE
+                    binding.bottomAppBar.visibility = View.GONE
+                    binding.fabAddTransaction.visibility = View.GONE
+                    binding.toolbar.visibility = View.GONE
                 }
                 else -> {
-                    binding.bottomNavigation.visibility = View.VISIBLE
+                    binding.bottomAppBar.visibility = View.VISIBLE
+                    binding.fabAddTransaction.visibility = View.VISIBLE
+                    binding.toolbar.visibility = View.VISIBLE
                 }
             }
         }
 
         // Check if user is logged in and navigate accordingly
         if (authRepository.getCurrentUser() != null) {
-            navController.navigate(R.id.transactionsFragment)
+            navController.navigate(R.id.action_loginFragment_to_dashboardFragment)
+        }
+
+        // Set up FAB click listener
+        binding.fabAddTransaction.setOnClickListener {
+            // Navigate to add transaction screen
+            navController.navigate(R.id.addTransactionFragment)
+        }
+
+        // Hide FAB when on certain destinations
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.addTransactionFragment -> {
+                    binding.fabAddTransaction.hide()
+                    binding.bottomAppBar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_END)
+                }
+                else -> {
+                    binding.fabAddTransaction.show()
+                    binding.bottomAppBar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_CENTER)
+                }
+            }
         }
     }
 
