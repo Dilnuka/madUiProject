@@ -140,11 +140,9 @@ class SettingsFragment : Fragment() {
         try {
             requireContext().contentResolver.openOutputStream(uri)?.use { outputStream ->
                 val writer = BufferedWriter(OutputStreamWriter(outputStream))
-                
-                // Write CSV header
+
                 writer.write("Date,Type,Category,Amount,Description\n")
-                
-                // Write transaction data
+
                 viewModel.transactions.value?.forEach { transaction ->
                     writer.write("${transaction.date},${transaction.type},${transaction.category},${transaction.amount},${transaction.description}\n")
                 }
